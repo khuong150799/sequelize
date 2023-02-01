@@ -8,18 +8,43 @@ exports.getAll = async (data, result) => {
         if (data.keyword) {
             keyword = data.keyword;
         }
+        // const { count, rows } = await db.User.findAndCountAll({
+        //     where: {
+        //         [Op.or]: [
+        //             { first_name: { [Op.substring]: keyword } },
+        //             { last_name: { [Op.substring]: keyword } },
+        //             { email: { [Op.substring]: keyword } },
+        //         ],
+        //         // email: { [Op.substring]: keyword },
+        //     },
+        //     order: [['id', 'DESC']],
+        //     offset: 0,
+        //     limit: 1,
+        // });
         const { count, rows } = await db.User.findAndCountAll({
+            include: [
+                {
+                    model: db.Task,
+                    required: true,
+                    include: [
+                        {
+                            model: db.Task_week,
+                            required: true,
+                        },
+                    ],
+                },
+            ],
             where: {
                 [Op.or]: [
                     { first_name: { [Op.substring]: keyword } },
                     { last_name: { [Op.substring]: keyword } },
                     { email: { [Op.substring]: keyword } },
                 ],
-                // email: { [Op.substring]: keyword },
             },
+
             order: [['id', 'DESC']],
             offset: 0,
-            limit: 1,
+            limit: 10,
         });
         // console.log(count);==> number page
         // console.log(rows);==> data
@@ -63,6 +88,9 @@ exports.update = async (data, id, result) => {
     try {
         const dataUser = await db.User.findByPk(id);
         // console.log(typeof data.email);
+        if (dataUser === null) {
+            result({ msg: 'ID không tồn tại' }, null);
+        }
         if (data.email == dataUser.email) {
             const resultUpdate = await db.User.update(data, { where: { id } });
             // console.log(resultUpdate);

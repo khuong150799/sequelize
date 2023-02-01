@@ -1,4 +1,4 @@
-GET http://localhost:3002/api/user/getall?keyword=
+GET http://localhost:3002/api/user/getall?keyword=gmail
 
 ###
 GET http://localhost:3002/api/user/getbyid/3
