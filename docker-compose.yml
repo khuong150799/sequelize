@@ -1,13 +1,17 @@
+#chay duoc
 version: '3'
 services:
     sequelize:
-        build: ./
-        command: sh -c "npm install && npm run migrate:up && npm start"
+        build: .
         volumes:
-            - ./sequelize:usr/src/app
-        ports:
-            - 3000:3002
-
+            - ./:/app
+        environment:
+            #MYSQL_HOST: mysql
+            MYSQL_USER: root
+            MYSQL_PASSWORD: password
+            MYSQL_DB: sequelizedb
+        depends_on:
+            - mysql
     mysql:
         image: mysql:8.0
         environment:
@@ -18,11 +22,14 @@ services:
 
     phpmyadmin:
         image: phpmyadmin/phpmyadmin
+        restart: always
         ports:
             - 8080:80
         environment:
             PMA_HOST: mysql
             PMA_PORT: 3306
             PMA_ARBITRARY: 1
+        depends_on:
+            - mysql
 volumes:
     db_data:

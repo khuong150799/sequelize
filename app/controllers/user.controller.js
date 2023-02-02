@@ -39,6 +39,7 @@ exports.getById = (req, res) => {
 
 exports.create = (req, res) => {
     const errors = validationResult(req);
+    console.log('HUY NE');
     if (!errors.isEmpty()) {
         res.send({
             result: false,

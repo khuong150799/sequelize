@@ -47,7 +47,7 @@ exports.getAll = async (data, result) => {
             limit: 10,
         });
         // console.log(count);==> number page
-        // console.log(rows);==> data
+        console.log(rows);
         result(null, { data: rows });
     } catch (error) {
         console.log(error);
