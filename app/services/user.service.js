@@ -3,7 +3,7 @@ const db = require('../models');
 
 exports.getAll = async (data, result) => {
     try {
-        // console.log(data);
+        console.log(123);
         let keyword = '';
         if (data.keyword) {
             keyword = data.keyword;
@@ -47,7 +47,7 @@ exports.getAll = async (data, result) => {
             limit: 10,
         });
         // console.log(count);==> number page
-        console.log(rows);
+        // console.log(rows);
         result(null, { data: rows });
     } catch (error) {
         console.log(error);

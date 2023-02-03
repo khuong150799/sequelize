@@ -9,7 +9,7 @@ content-type: application/json
 {
     "firstName":"duy",
     "lastName":"khương",
-    "email":"duykhương@gmail.com"
+    "email":"duykhương8@gmail.com"
 }
 ###
 PUT http://localhost:3002/api/user/update/4

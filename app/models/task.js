@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
             Task.hasMany(models.Task_week, {
                 foreignKey: 'task_id',
             });
-            console.log(models);
+            // console.log(models);
         }
     }
     Task.init(

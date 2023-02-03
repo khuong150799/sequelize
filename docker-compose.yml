@@ -3,8 +3,11 @@ version: '3'
 services:
     sequelize:
         build: .
+        command: sh -c "npm run migrate:up && npm start"
+        ports:
+            - 3000:3002
         volumes:
-            - ./:/app
+            - .:/app
         environment:
             #MYSQL_HOST: mysql
             MYSQL_USER: root
